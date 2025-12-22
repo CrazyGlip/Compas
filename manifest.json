@@ -1,0 +1,21 @@
+{
+  "name": "Карьерный Компас",
+  "short_name": "Компас",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e293b",
+  "theme_color": "#0f172a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dxmoaebbj/image/upload/v1763388900/ЛИПЕЦКИЙ_МЕТАЛЛУРГИЧЕСКИЙ_КОЛЛЕДЖ_иконка_rd0hlx.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://res.cloudinary.com/dxmoaebbj/image/upload/v1763388900/ЛИПЕЦКИЙ_МЕТАЛЛУРГИЧЕСКИЙ_КОЛЛЕДЖ_иконка_rd0hlx.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

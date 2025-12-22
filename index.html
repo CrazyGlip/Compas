@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- PWA Settings -->
+    <title>Карьерный Компас</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Компас">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'brand-purple': '#6750A4',
+              'brand-blue': '#0061A4',
+              'primary': '#6750A4',
+              'secondary': '#625B71',
+              'tertiary': '#7D5260',
+              'surface': '#1C1B1F',
+              'background': '#1C1B1F',
+            },
+            animation: {
+              'fade-in': 'fade-in 0.5s ease-out',
+              'fade-in-up': 'fade-in-up 0.5s ease-out',
+              'fade-in-down': 'fade-in-down 0.3s ease-out',
+            },
+            keyframes: {
+              'fade-in': { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+              'fade-in-up': { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+              'fade-in-down': { '0%': { opacity: '0', transform: 'translateY(-10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            },
+            padding: {
+              'safe': 'env(safe-area-inset-bottom)',
+            }
+          },
+        },
+      }
+    </script>
+    <!-- Dependencies are managed via importmap -->
+  <script type="importmap">
+{
+  "imports": {
+    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.3"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
