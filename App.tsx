@@ -54,6 +54,9 @@ const App: React.FC = () => {
   const [isAdminMode, setIsAdminMode] = useState(() => localStorage.getItem('admin_mode') === 'true');
   const [theme, setTheme] = useState<ThemeMode>(() => (localStorage.getItem('theme') as ThemeMode) || 'system');
   
+  // Swipe State
+  const [touchStart, setTouchStart] = useState<{ x: number, y: number } | null>(null);
+
   // Data for Recommendations
   const [userQuizResults, setUserQuizResults] = useState<UserQuizResult[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -167,22 +170,18 @@ const App: React.FC = () => {
         }
     });
 
-    // --- NEW MATHEMATICS FOR ACCURACY (RECSYS 4.0) ---
     const hasFavs = subjects.some(s => s.isFavorite);
     const uniquePassedCount = new Set(userQuizResults.map(r => r.quiz_id)).size;
     const hasSpecInPlan = plan.some(p => p.type === 'specialty');
     const hasColInPlan = plan.some(p => p.type === 'college');
     
     let completeness = 0;
-    if (hasFavs) completeness += 10; // Любимые предметы: 10%
-    
-    // Тесты: 40% от общего кол-ва тестов в системе
+    if (hasFavs) completeness += 10;
     if (totalQuizzesInDB > 0) {
         completeness += (uniquePassedCount / totalQuizzesInDB) * 40;
     }
-    
-    if (hasSpecInPlan) completeness += 25; // Профессии: 25%
-    if (hasColInPlan) completeness += 25;  // Колледжи: 25%
+    if (hasSpecInPlan) completeness += 25;
+    if (hasColInPlan) completeness += 25;
 
     return { aggregatedScores: scores, analysisCompleteness: Math.min(100, Math.round(completeness)) };
   }, [userQuizResults, subjects, subjectRelations, plan, allSpecialties, recWeights, totalQuizzesInDB]);
@@ -252,6 +251,52 @@ const App: React.FC = () => {
     } else {
       setView({ name: 'dashboard' });
     }
+  };
+
+  // --- SWIPE NAVIGATION LOGIC ---
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    });
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+    
+    const touchEnd = {
+      x: e.changedTouches[0].clientX,
+      y: e.changedTouches[0].clientY
+    };
+    
+    const deltaX = touchStart.x - touchEnd.x;
+    const deltaY = touchStart.y - touchEnd.y;
+    const minDistance = 100;
+
+    // Check if horizontal movement is significant and much larger than vertical
+    if (Math.abs(deltaX) > minDistance && Math.abs(deltaX) > Math.abs(deltaY) * 2) {
+      const swipeTabs: ('dashboard' | 'shorts' | 'news')[] = ['dashboard', 'shorts', 'news'];
+      
+      // Only enable on primary tabs
+      if (swipeTabs.includes(view.name as any)) {
+        const currentIdx = swipeTabs.indexOf(view.name as any);
+        let nextIdx = currentIdx;
+
+        if (deltaX > 0) {
+          // Swipe Left -> Go Right in array
+          nextIdx = Math.min(swipeTabs.length - 1, currentIdx + 1);
+        } else {
+          // Swipe Right -> Go Left in array
+          nextIdx = Math.max(0, currentIdx - 1);
+        }
+
+        if (nextIdx !== currentIdx) {
+          if (navigator.vibrate) navigator.vibrate(10);
+          navigateTo({ name: swipeTabs[nextIdx] });
+        }
+      }
+    }
+    setTouchStart(null);
   };
 
   const addToPlan = (id: string, type: 'specialty' | 'college') => {
@@ -362,7 +407,11 @@ const App: React.FC = () => {
   const showBars = !noBarViews.includes(view.name);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+    <div 
+      className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {showBars && <AppBar onBack={navigateBack} onNavigate={navigateTo} />}
       <main className={`${showBars ? 'pt-20 pb-24 px-4 max-w-lg mx-auto' : ''}`}>
         {renderContent()}

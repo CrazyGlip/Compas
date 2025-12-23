@@ -7,6 +7,105 @@ import { specialtyImages } from './assets';
 
 export { mockSpecialties, mockColleges, mockEvents };
 
+/* Fixed: Added missing exported member defaultSubjects for calculator and profile screens */
+export const defaultSubjects: Subject[] = [
+    { id: 'math', name: 'Математика', grade: 0, weight: 1.2, isFavorite: false },
+    { id: 'rus', name: 'Русский язык', grade: 0, weight: 1.0, isFavorite: false },
+    { id: 'phys', name: 'Физика', grade: 0, weight: 1.1, isFavorite: false },
+    { id: 'it', name: 'Информатика', grade: 0, weight: 1.3, isFavorite: false },
+    { id: 'chem', name: 'Химия', grade: 0, weight: 1.1, isFavorite: false },
+    { id: 'bio', name: 'Биология', grade: 0, weight: 1.1, isFavorite: false },
+    { id: 'hist', name: 'История', grade: 0, weight: 0.9, isFavorite: false },
+    { id: 'soc', name: 'Обществознание', grade: 0, weight: 1.0, isFavorite: false },
+    { id: 'geo', name: 'География', grade: 0, weight: 0.8, isFavorite: false },
+    { id: 'eng', name: 'Английский язык', grade: 0, weight: 1.1, isFavorite: false },
+    { id: 'lit', name: 'Литература', grade: 0, weight: 0.8, isFavorite: false },
+];
+
+/* Fixed: Added missing exported member globalTags for recommendation system */
+export const globalTags: Tag[] = [
+    { id: 'dom-it', name: 'IT и Цифра', category: 'domain' },
+    { id: 'dom-tech', name: 'Техника и Производство', category: 'domain' },
+    { id: 'dom-med', name: 'Медицина и Здоровье', category: 'domain' },
+    { id: 'dom-agro', name: 'Природа и Агро', category: 'domain' },
+    { id: 'dom-soc', name: 'Педагогика и Общество', category: 'domain' },
+    { id: 'dom-art', name: 'Искусство и Культура', category: 'domain' },
+    { id: 'dom-build', name: 'Строительство и Среда', category: 'domain' },
+    { id: 'dom-serv', name: 'Сервис и Туризм', category: 'domain' },
+    { id: 'attr-logic', name: 'Логика', category: 'attribute' },
+    { id: 'attr-empathy', name: 'Эмпатия', category: 'attribute' },
+    { id: 'attr-visual', name: 'Визуал', category: 'attribute' },
+    { id: 'attr-tools', name: 'Работа руками', category: 'attribute' },
+    { id: 'attr-mobility', name: 'Мобильность', category: 'attribute' },
+    { id: 'attr-teach', name: 'Обучение', category: 'attribute' },
+];
+
+/* Fixed: Added missing exported member defaultSubjectRelations for tagging subjects */
+export const defaultSubjectRelations: SubjectRelation[] = [
+    { subjectId: 'math', tags: [{ tagId: 'attr-logic', weight: 100 }, { tagId: 'dom-it', weight: 50 }] },
+    { subjectId: 'it', tags: [{ tagId: 'dom-it', weight: 100 }, { tagId: 'attr-logic', weight: 80 }] },
+    { subjectId: 'phys', tags: [{ tagId: 'dom-tech', weight: 80 }, { tagId: 'dom-build', weight: 60 }] },
+    { subjectId: 'rus', tags: [{ tagId: 'dom-soc', weight: 40 }] },
+    { subjectId: 'chem', tags: [{ tagId: 'dom-med', weight: 70 }, { tagId: 'dom-agro', weight: 50 }] },
+    { subjectId: 'bio', tags: [{ tagId: 'dom-med', weight: 80 }, { tagId: 'dom-agro', weight: 90 }] },
+    { subjectId: 'hist', tags: [{ tagId: 'dom-soc', weight: 60 }, { tagId: 'dom-art', weight: 40 }] },
+    { subjectId: 'soc', tags: [{ tagId: 'dom-soc', weight: 100 }, { tagId: 'dom-serv', weight: 60 }] },
+    { subjectId: 'geo', tags: [{ tagId: 'dom-agro', weight: 60 }, { tagId: 'dom-serv', weight: 70 }] },
+    { subjectId: 'eng', tags: [{ tagId: 'dom-it', weight: 40 }, { tagId: 'dom-serv', weight: 80 }] },
+    { subjectId: 'lit', tags: [{ tagId: 'dom-art', weight: 80 }, { tagId: 'dom-soc', weight: 30 }] },
+];
+
+/* Fixed: Added missing exported member CLASSIC_QUIZ_DATA for classic quiz implementation */
+export const CLASSIC_QUIZ_DATA = {
+    title: 'Классический тест',
+    description: 'Узнай свои сильные стороны',
+    questions: [
+        {
+            text: 'Что тебе ближе?',
+            answers: [
+                { text: 'Программирование', target_category: 'dom-it' },
+                { text: 'Лечение людей', target_category: 'dom-med' },
+                { text: 'Ремонт техники', target_category: 'dom-tech' },
+                { text: 'Работа в поле', target_category: 'dom-agro' },
+            ]
+        }
+    ]
+};
+
+/* Fixed: Added missing exported member battleQuestions for battle quiz mode */
+export const battleQuestions = [
+    {
+        text: 'Что выберешь?',
+        answers: [
+            { text: 'Компьютер', target_category: 'dom-it', image_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97' },
+            { text: 'Микроскоп', target_category: 'dom-med', image_url: 'https://images.unsplash.com/photo-1581093458791-9f3c3900df4b' },
+        ]
+    }
+];
+
+/* Fixed: Added missing exported member swipeQuizQuestions for swipe quiz mode */
+export const swipeQuizQuestions = [
+    {
+        text: 'Тебе нравится математика?',
+        payload: { category: 'attr-logic' }
+    },
+    {
+        text: 'Любишь рисовать?',
+        payload: { category: 'attr-visual' }
+    }
+];
+
+/* Fixed: Added missing exported member DDO_QUESTIONS for Klimov test implementation */
+export const DDO_QUESTIONS = [
+    {
+        text: 'Мне нравится...',
+        answers: [
+            { text: 'Ухаживать за животными', target_category: 'nature' },
+            { text: 'Чинить приборы', target_category: 'tech' },
+        ]
+    }
+];
+
 export const mockNews: NewsItem[] = [
     {
         id: 'n1',
@@ -16,6 +115,36 @@ export const mockNews: NewsItem[] = [
         content: '<p>В 2025 году абитуриентов ждут новые правила подачи документов. Вводится приоритетное зачисление для победителей региональных олимпиад и расширяются квоты на целевое обучение от ведущих предприятий региона.</p>',
         imageUrl: 'https://images.unsplash.com/photo-1523240715630-3889025e1141?auto=format&fit=crop&w=800&q=80',
         tags: ['Поступление', '2025'],
+        gallery: []
+    },
+    {
+        id: 'n2',
+        title: 'Форум «Карьера 48» пройдет в марте',
+        date: '2025-02-10',
+        summary: 'Крупнейшая площадка для встречи студентов и работодателей региона.',
+        content: '<p>В Липецке пройдет ежегодный форум профессиональной ориентации. Студенты колледжей смогут лично пообщаться с представителями НЛМК, ОЭЗ «Липецк» и других гигантов индустрии.</p>',
+        imageUrl: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=800&q=80',
+        tags: ['Карьера', 'Липецк'],
+        gallery: []
+    },
+    {
+        id: 'n3',
+        title: 'Открытие новых мастерских «Профессионалитета»',
+        date: '2025-02-20',
+        summary: 'В трех колледжах области обновили оборудование для обучения сварщиков и ИТ-специалистов.',
+        content: '<p>В рамках федерального проекта современные лаборатории открылись в ЛМК и Липецком индустриально-строительном колледже. Студенты теперь работают на тренажерах с VR-дополненной реальностью.</p>',
+        imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80',
+        tags: ['Обучение', 'Технологии'],
+        gallery: []
+    },
+    {
+        id: 'n4',
+        title: 'Гранты для лучших студентов СПО',
+        date: '2025-02-25',
+        summary: 'Объявлен прием заявок на губернаторскую стипендию для выдающихся достижений в учебе.',
+        content: '<p>Студенты Липецких техникумов, имеющие отличные оценки и победы в конкурсах мастерства, могут рассчитывать на повышенную ежемесячную выплату в течение учебного года.</p>',
+        imageUrl: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80',
+        tags: ['Поддержка', 'Студенты'],
         gallery: []
     }
 ];
@@ -486,115 +615,4 @@ export const mockTop50Professions: Profession[] = [
       { "name": "ООО Автобан-Липецк", "description": "Строительство крупных трасс." }
     ]
   }
-];
-
-export const globalTags: Tag[] = [
-    { id: 'dom-tech', name: 'Техника и Производство', category: 'domain' },
-    { id: 'dom-it', name: 'IT и Цифра', category: 'domain' },
-    { id: 'dom-const', name: 'Строительство и Среда', category: 'domain' },
-    { id: 'dom-med', name: 'Медицина и Здоровье', category: 'domain' },
-    { id: 'dom-art', name: 'Искусство и Культура', category: 'domain' },
-    { id: 'dom-soc', name: 'Педагогика и Общество', category: 'domain' },
-    { id: 'dom-serv', name: 'Сервис и Туризм', category: 'domain' },
-    { id: 'dom-agro', name: 'Природа и Агро', category: 'domain' },
-    { id: 'attr-logic', name: 'Логика и Анализ', category: 'attribute' },
-    { id: 'attr-sys', name: 'Системность', category: 'attribute' },
-    { id: 'attr-focus', name: 'Концентрация', category: 'attribute' },
-    { id: 'attr-hands-fine', name: 'Тонкая моторика', category: 'attribute' },
-    { id: 'attr-hands-hard', name: 'Физический труд', category: 'attribute' },
-    { id: 'attr-tools', name: 'Работа инструментом', category: 'attribute' },
-    { id: 'attr-voice', name: 'Голос и Речь', category: 'attribute' },
-    { id: 'attr-visual', name: 'Визуальное восприятие', category: 'attribute' },
-    { id: 'attr-empathy', name: 'Эмпатия', category: 'attribute' },
-    { id: 'attr-comm', name: 'Общительность', category: 'attribute' },
-    { id: 'attr-teach', name: 'Наставничество', category: 'attribute' },
-    { id: 'attr-risk', name: 'Смелость / Риск', category: 'attribute' },
-    { id: 'attr-mobility', name: 'Подвижность', category: 'attribute' },
-    { id: 'attr-creativity', name: 'Креативность', category: 'attribute' },
-];
-
-export const defaultSubjectRelations: SubjectRelation[] = [
-    { subjectId: 'algebra', tags: [{ tagId: 'attr-logic', weight: 100 }, { tagId: 'dom-it', weight: 40 }] },
-    { subjectId: 'geometry', tags: [{ tagId: 'attr-logic', weight: 80 }, { tagId: 'attr-visual', weight: 70 }, { tagId: 'dom-const', weight: 60 }] },
-    { subjectId: 'physics', tags: [{ tagId: 'dom-tech', weight: 100 }, { tagId: 'attr-sys', weight: 90 }, { tagId: 'attr-tools', weight: 50 }] },
-    { subjectId: 'informatics', tags: [{ tagId: 'dom-it', weight: 100 }, { tagId: 'attr-logic', weight: 90 }, { tagId: 'attr-sys', weight: 70 }] },
-    { subjectId: 'biology', tags: [{ tagId: 'dom-med', weight: 90 }, { tagId: 'dom-agro', weight: 90 }] },
-    { subjectId: 'chemistry', tags: [{ tagId: 'dom-med', weight: 80 }, { tagId: 'dom-agro', weight: 60 }] },
-    { subjectId: 'social_studies', tags: [{ tagId: 'dom-soc', weight: 100 }, { tagId: 'attr-comm', weight: 80 }] },
-];
-
-export const defaultSubjects: Subject[] = [
-  { id: 'russian', name: 'Русский язык', grade: 0, weight: 1, isFavorite: false },
-  { id: 'algebra', name: 'Алгебра', grade: 0, weight: 1, isFavorite: false },
-  { id: 'geometry', name: 'Геометрия', grade: 0, weight: 1, isFavorite: false },
-  { id: 'literature', name: 'Литература', grade: 0, weight: 1, isFavorite: false },
-  { id: 'foreign_language', name: 'Иностранный язык', grade: 0, weight: 1, isFavorite: false },
-  { id: 'history', name: 'История', grade: 0, weight: 1, isFavorite: false },
-  { id: 'social_studies', name: 'Обществознание', grade: 0, weight: 1, isFavorite: false },
-  { id: 'geography', name: 'География', grade: 0, weight: 1, isFavorite: false },
-  { id: 'biology', name: 'Биология', grade: 0, weight: 1, isFavorite: false },
-  { id: 'physics', name: 'Физика', grade: 0, weight: 1, isFavorite: false },
-  { id: 'chemistry', name: 'Химия', grade: 0, weight: 1, isFavorite: false },
-  { id: 'informatics', name: 'Информатика', grade: 0, weight: 1, isFavorite: false },
-  { id: 'pe', name: 'Физкультура', grade: 0, weight: 1, isFavorite: false },
-];
-
-export const swipeQuizQuestions: any[] = [
-  { id: 1, text: 'Я люблю копаться в настройках гаджетов и программ', category: 'dom-it' },
-  { id: 2, text: 'Мне интересно, как устроены заводы и крупные механизмы', category: 'dom-tech' },
-  { id: 3, text: 'Я с удовольствием рисую или создаю что-то красивое', category: 'dom-art' },
-  { id: 4, text: 'Мне важно помогать людям и заботиться об их здоровье', category: 'dom-med' },
-  { id: 5, text: 'Я люблю организовывать мероприятия и праздники', category: 'dom-soc' },
-  { id: 6, text: 'Я интересуюсь экологией и миром живой природы', category: 'dom-agro' },
-  { id: 7, text: 'Я хотел бы строить дома или проектировать города', category: 'dom-const' },
-  { id: 8, text: 'Мне нравится сфера обслуживания и общения с клиентами', category: 'dom-serv' },
-  { id: 9, text: 'Я хотел бы создавать мобильные приложения', category: 'dom-it' },
-  { id: 10, text: 'Меня привлекает работа на современном производстве', category: 'dom-tech' },
-  { id: 11, text: 'Я люблю посещать театры, выставки и музеи', category: 'dom-art' },
-  { id: 12, text: 'Мне интересна химия и биология в медицине', category: 'dom-med' },
-  { id: 13, text: 'Я легко нахожу общий язык с детьми', category: 'dom-soc' },
-  { id: 14, text: 'Я люблю ухаживать за растениями или животными', category: 'dom-agro' },
-  { id: 15, text: 'Дизайн интерьеров кажется мне отличным делом', category: 'dom-const' },
-  { id: 16, text: 'Я всегда ищу логику и закономерности в событиях', category: 'attr-logic' },
-  { id: 17, text: 'Порядок и система для меня важнее хаоса', category: 'attr-sys' },
-  { id: 18, text: 'Я могу долго концентрироваться на одной задаче', category: 'attr-focus' },
-  { id: 19, text: 'У меня хорошо получается работать руками с мелкими деталями', category: 'attr-hands-fine' },
-  { id: 20, text: 'Я не боюсь тяжелой физической работы', category: 'attr-hands-hard' },
-  { id: 21, text: 'Я умею пользоваться инструментами (молоток, отвертка и т.д.)', category: 'attr-tools' },
-  { id: 22, text: 'У меня выразительный голос и я люблю выступать', category: 'attr-voice' },
-  { id: 23, text: 'Я мыслю образами и картинками', category: 'attr-visual' },
-  { id: 24, text: 'Я тонко чувствую эмоции других людей', category: 'attr-empathy' },
-  { id: 25, text: 'Я люблю много общаться и быть в центре внимания', category: 'attr-comm' },
-  { id: 26, text: 'Я готов брать ответственность за группу людей', category: 'attr-teach' },
-  { id: 27, text: 'Риск и экстрим меня не пугают, а бодрят', category: 'attr-risk' },
-  { id: 28, text: 'Я ненавижу сидеть на одном месте, мне нужно движение', category: 'attr-mobility' },
-  { id: 29, text: 'Я часто придумываю нестандартные решения проблем', category: 'attr-creativity' },
-  { id: 30, text: 'Анализ данных и таблиц кажется мне увлекательным', category: 'attr-logic' },
-];
-
-export const DDO_QUESTIONS = [
-    { text: "Что выберешь?", options: [{ text: "Ухаживать за животными", tag: "nature" }, { text: "Обслуживать машины", tag: "tech" }] },
-    { text: "Что интереснее?", options: [{ text: "Помогать больным людям", tag: "communication" }, { text: "Составлять таблицы", tag: "sign" }] },
-    { text: "Твое занятие?", options: [{ text: "Рисовать афиши", tag: "art" }, { text: "Следить за ростом растений", tag: "nature" }] },
-    { text: "Где бы ты работал?", options: [{ text: "В мастерской", tag: "tech" }, { text: "В редакции журнала", tag: "sign" }] }
-];
-
-export const CLASSIC_QUIZ_DATA = [
-    {
-        text: "Какая сфера деятельности привлекает вас больше всего?",
-        options: [
-            { text: "Техника и производство", tag: "dom-tech" },
-            { text: "IT и разработка", tag: "dom-it" },
-            { text: "Дизайн и творчество", tag: "dom-art" },
-            { text: "Медицина", tag: "dom-med" }
-        ]
-    }
-];
-
-export const battleQuestions: any[] = [
-    {
-        id: 1,
-        optionA: { text: 'Лечить животных', imageUrl: specialtyImages['36.02.01'], category: 'dom-agro' }, 
-        optionB: { text: 'Чинить машины', imageUrl: 'https://yrlxygbsmfndcfntdmon.supabase.co/storage/v1/object/public/images/Avto.jpg', category: 'dom-tech' }
-    }
 ];

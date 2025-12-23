@@ -130,9 +130,15 @@ export const api = {
     },
 
     async getNews(): Promise<NewsItem[]> {
+        // Приоритет MEMORY_CACHE, затем localStorage, если там есть данные.
+        // Если ничего нет или там старая версия (всего 1 элемент), берем mockNews.
         if (MEMORY_CACHE.news) return MEMORY_CACHE.news;
         const local = localStorage.getItem(KEYS.NEWS);
-        return local ? JSON.parse(local) : mockNews;
+        if (local) {
+            const parsed = JSON.parse(local);
+            if (parsed.length > 1) return parsed;
+        }
+        return mockNews;
     },
 
     async getSubjectRelations(): Promise<SubjectRelation[]> {
